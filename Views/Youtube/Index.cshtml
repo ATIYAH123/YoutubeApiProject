@@ -1,0 +1,31 @@
+﻿@model List<YouTubeApiProject.Models.YouTubeVideoModel>
+
+<h2>Search YouTube Videos</h2>
+
+<form asp-action="Search" method="post">
+    <input type="text" class="form-control" name="query" placeholder="Search for artist" />
+    <button type="submit" class="btn btn-danger">Search</button>
+</form>
+
+@if (Model != null && Model.Any())
+{
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            @foreach (var video in Model)
+            {
+                <div class="col-sm-4 mb-3">
+                    <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+                        <img src="@video.ThumbnailUrl" alt="@video.Title" class="card-img-top" />
+                        <div class="card-body">
+                            <h5 class="card-title">@video.Title</h5>
+                            <p class="card-text">@video.Description</p>
+                            <a href="@video.VideoUrl" target="_blank">
+                                <button type="button" class="btn btn-secondary">Watch</button> <!-- Watch button -->
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
